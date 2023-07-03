@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strconv"
 	"strings"
 	"sync"
 )
@@ -144,6 +145,8 @@ func lookupAddrWithContext(ctx context.Context, ip, resolver string) ([]string, 
 	if err != nil {
 		return nil, err
 	}
+	defer conn.Close()
+
 	// Perform DNS lookup using the connection
 	return net.LookupAddr(ip)
 }
